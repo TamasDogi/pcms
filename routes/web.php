@@ -35,7 +35,6 @@ Route::get('/welcome', function () {
     return view('pages/welcome');
 })->name('welcome');
 
-
 Route::middleware('auth')->group(function () {    
     Route::get('/', [SiteController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [SiteController::class, 'dashboard'])->name('dashboard');
