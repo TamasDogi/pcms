@@ -37,7 +37,6 @@ Route::get('/welcome', function () {
 
 Route::middleware('auth')->group(function () {    
     Route::get('/welcome', [SiteController::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard', [SiteController::class, 'dashboard'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
