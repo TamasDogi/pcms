@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('pages/welcome');
     });
 });
 
@@ -34,7 +34,6 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('pages/welcome');
 })->name('welcome');
-
 
 Route::middleware('auth')->group(function () {    
     Route::get('/', [SiteController::class, 'dashboard'])->name('dashboard');
