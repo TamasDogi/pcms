@@ -21,7 +21,7 @@ class SiteController extends Controller
     {
         $user = Auth::user();
         $site = Site::where('id', $user->siteID)->findOrFail($user->siteID);
-        return View::make('pages/dashboard')->with(compact('fixtures')); 
+        return View::make('pages/dashboard')->with(compact('site')); 
     }
 
     public function index()
