@@ -1,17 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Create new content') }}
         </h2>
     </x-slot>
 
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h2 class="text-xl font-bold dark:text-white mb-4">Create new content</h2>
+                    <h2 class="mb-4 text-xl font-bold dark:text-white">Create new content</h2>
 
                     @if ($message = Session::get('success'))
                         <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -26,22 +26,23 @@
                         </div>
                     @endif
 
-                    <form method="post" action="/contents/created" class="mt-4 pt-4" enctype="multipart/form-data">
+                    <form method="post" action="/contents/created" class="pt-4 mt-4" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <input type="hidden" name="id" value="1">
+        
 
-                        <div class="grid md:grid-cols-2 md:gap-6 gap-6 ">
+                        <div class="">
                             <div class="relative z-0 w-full mb-5 group">
                                 <label for="content-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ContentID <span class="text-red-600">*</span></label>
                                 <input type="text" name="contentID" id="" class="{{Config::get('site.formInputClass')}}" placeholder=" " value="" required />
                             </div>
                             <div class="relative z-0 w-full mb-5 group">
-                                <label for="content-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Value <span class="text-red-600">*</span></label>
-                                <input type="text" name="content_value" id="" class="{{Config::get('site.formInputClass')}}" placeholder=" " value="" required />
+                                <label for="content-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Value 
+                                <span class="text-red-600">*</span></label>
+                                
+                                <textarea name="content_value" id="content_value" class="{{Config::get('site.formInputClass')}} h-[200px]" placeholder=" " required>
+                                </textarea>
                             </div>
                         </div>
-
-
 
                         <a href="#" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
                             < back to the previous page
@@ -54,5 +55,11 @@
             </div>
         </div>
     </div>
-
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#content_value' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 </x-app-layout>
