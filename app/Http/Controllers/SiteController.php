@@ -20,8 +20,8 @@ class SiteController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        echo $site = Site::where('id', $user->siteID)->findOrFail($user->siteID);
-        //return View::make('pages/dashboard')->with(compact('site')); 
+        $site = Site::where('id', $user->siteID)->findOrFail($user->siteID);
+        return View::make('pages/dashboard')->with(compact('site')); 
     }
 
     public function index()
