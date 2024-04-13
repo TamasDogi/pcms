@@ -27,10 +27,19 @@ Route::get('/contents', function () {
     return view('pages/contents');
 })->middleware(['auth', 'verified'])->name('contents');
 
-Route::get('/dashboard', function () {
-    return view('pages/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return view('pages/welcome');
+})->name('welcome');
 
+Route::get('/welcome', function () {
+    return view('pages/welcome');
+})->name('welcome');
+
+
+Route::middleware('auth')->group(function () {    
+    Route::get('/', [SiteController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [SiteController::class, 'dashboard'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/site', [SiteController::class, 'index'])->name('site');
@@ -40,7 +49,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/pages', [PagesController::class, 'index'])->name('pages');
     Route::get('/pages/create', [PagesController::class, 'create'])->name('create.page');
-    Route::post('/pages/created', [PagesController::class, 'created'])->name('create.page');
+    Route::post('/pages/created', [PagesController::class, 'created'])->name('created.page');
     Route::get('/pages/edit/{id}', [PagesController::class, 'edit'])->name('edit.page');
     Route::post('/pages/update', [PagesController::class, 'update'])->name('update.page');
 });
@@ -48,17 +57,18 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/contents', [ContentController::class, 'index'])->name('contents');
     Route::get('/contents/create', [ContentController::class, 'create'])->name('create.content');
-    Route::post('/contents/created', [ContentController::class, 'created'])->name('create.content');
+    Route::post('/contents/created', [ContentController::class, 'created'])->name('created.content');
     Route::get('/contents/edit/{id}', [ContentController::class, 'edit'])->name('edit.content');
     Route::post('/contents/update', [ContentController::class, 'update'])->name('update.content');
 });
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/sendemail', [SiteController::class, 'sendEmail'])->name('sendEmail');
+Route::get('/clearcache', [SiteController::class, 'clearcc'])->name('clearcc');
 
 require __DIR__.'/auth.php';

@@ -24,6 +24,15 @@
                     <x-nav-link :href="route('contents')" :active="request()->routeIs('contents')">
                         {{ __('Contents') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('contents')" :active="request()->routeIs('menus')">
+                        {{ __('Menus') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contents')" :active="request()->routeIs('posts')">
+                        {{ __('Posts') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contents')" :active="request()->routeIs('post_categories')">
+                        {{ __('Post categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pages;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
     public function apiIndex(): \Illuminate\Http\JsonResponse
     {
         $pages = Pages::where('siteID', 1)->get();
@@ -21,13 +23,13 @@ class PagesController extends Controller
 
     public function index()
     {
-        $pages = Pages::all();
+        $pages = Pages::where('siteID', Auth::user()->siteID)->get();
         return view('pages/pages', compact("pages", ));
     }
 
     public function edit($id)
     {
-        $page = Pages::find($id);
+        $page = Pages::where('siteID', Auth::user()->siteID)->find($id);
         return view('pages/editPage', compact("page"));
     }
 
@@ -41,7 +43,7 @@ class PagesController extends Controller
     {
         $page = Pages::create([
             'title' => $request->title,
-            'siteID' => 1,
+            'siteID' => Auth::user()->siteID,
             'slug' => $request->slug,
             'page_content' => $request->page_content,
             'status' => $request->status]);
@@ -51,7 +53,7 @@ class PagesController extends Controller
 
     public function update(Request $request)
     {
-        $page = Pages::findOrFail($request->id);
+        $page = Pages::where('siteID', Auth::user()->siteID)->findOrFail($request->id);
         $page->title = is_null($request->title) ? $page->title : $request->title;
         $page->slug = is_null($request->slug) ? $page->slug : $request->slug;
         $page->page_content = is_null($request->page_content) ? $page->page_content : $request->page_content;
