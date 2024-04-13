@@ -6,7 +6,7 @@ use App\Models\Site;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\View;
 
 class SiteController extends Controller
 {
@@ -21,8 +21,7 @@ class SiteController extends Controller
     {
         $user = Auth::user();
         $site = Site::where('id', $user->siteID)->findOrFail($user->siteID);
-        //var_dump($site);
-        return view('pages/dashboard', compact("site"));        
+        return View::make('pages/dashboard')->with(compact('fixtures')); 
     }
 
     public function index()
