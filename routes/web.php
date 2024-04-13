@@ -38,6 +38,8 @@ Route::get('/welcome', function () {
 Route::middleware('auth')->group(function () {    
     Route::get('/welcome', [SiteController::class, 'dashboard'])->name('dashboard');
     Route::get('/site', [SiteController::class, 'index'])->name('site');
+    Route::get('/sendemail', [SiteController::class, 'sendEmail'])->name('sendEmail');
+    Route::get('/clearcache', [SiteController::class, 'clearcc'])->name('clearcc');    
     Route::post('/site/update', [SiteController::class, 'update'])->name('site.update');
     Route::get('/pages', [PagesController::class, 'index'])->name('pages');
     Route::get('/pages/create', [PagesController::class, 'create'])->name('create.page');
@@ -52,8 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/sendemail', [SiteController::class, 'sendEmail'])->name('sendEmail');
-    Route::get('/clearcache', [SiteController::class, 'clearcc'])->name('clearcc');
 });
 
 
