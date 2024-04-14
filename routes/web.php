@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('pages/welcome');
-    });
-});
 
 Route::get('/contents', function () {
     return view('pages/contents');
