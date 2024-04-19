@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Messages extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'message', 'sender_name', 'sender_email', 'sender_phone', 'type'];
-
+    protected $fillable = ['siteID', 'message_text', 'name', 'email', 'phone'];
 }

@@ -28,3 +28,6 @@ Route::get('/pages/{id}', [PagesController::class, 'apiView']);
 
 Route::get('/contacts', [MessageController::class, 'index']);
 Route::post('/quote', [MessageController::class, 'sendMessage']);
+
+Route::post('/message', [MessageController::class, 'message']);
+Route::get('/message/list', [MessageController::class, 'mlist']);

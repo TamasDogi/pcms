@@ -1,22 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Message;
+use App\Models\Messages;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index(): \Illuminate\Http\JsonResponse
-    {
-        
-        $message = 'Hello mindenki. Jol vagytok?';
-        $sender_name = 'Tamas Dogi';
-        $sender_email = 'tamas@tamas.hu';
-        $sender_phone = '0234234234';
-        $type = 'message';
-
-
-
-        return response()->json($message);
+    public function message(Request $request): \Illuminate\Http\JsonResponse
+    {        
+        $msg = Messages::create([
+            'message_text' => $request->message,
+            'siteID' =>$request->siteID,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'name' => $request->name]);   
+        return response()->json($msg);
     }
+
+    public function mlist(): \Illuminate\Http\JsonResponse
+    {        
+        $msg = Messages::get();   
+        return response()->json($msg);
+    }    
 }
