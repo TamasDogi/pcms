@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class ContentController extends Controller
 {
 
+    public function apiView($id): \Illuminate\Http\JsonResponse
+    {
+        $pages = Contents::where(['siteID' => $id, 'status' => 1])->get();
+        return response()->json($pages);
+    }
+
     public function index()
     {
         $contents = Contents::where('siteID', Auth::user()->siteID)->get();
@@ -17,8 +23,9 @@ class ContentController extends Controller
 
     public function edit($id)
     {
+        $role = Auth::user()->role;
         $content = Contents::find($id);
-        return view('pages/editContent', compact("content", ));
+        return view('pages/editContent', compact("content", "role"));
     }
 
     public function create(Request $request)
@@ -31,7 +38,7 @@ class ContentController extends Controller
         $content = Contents::create([
             'siteID' => Auth::user()->siteID,
             'contentID' => $request->contentID,
-            'status' => 0,
+            'status' => 1,
             'content_value' => $request->content_value,
         ]);
         $request->session()->flash('success', 'Content has been created!');
@@ -43,7 +50,7 @@ class ContentController extends Controller
     {
         $content = Contents::where('siteID', Auth::user()->siteID)->findOrFail($request->id);
         $content->contentID = is_null($request->contentID) ? $content->contentID : $request->contentID;
-        $content->content_value = is_null($request->content_value) ? $content->content_value : $request->content_value;
+        $content->content_value = is_null($request->page_content) ? $content->content_value : $request->page_content;
         $content->status = is_null($request->status) ? $content->status : $request->status;
         $content->save();
         $request->session()->flash('success', 'Content has been updated successfully!');

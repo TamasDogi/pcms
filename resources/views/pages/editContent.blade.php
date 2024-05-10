@@ -33,7 +33,12 @@
                         <div class="">
                             <div class="relative z-0 mb-5 group">
                                 <label for="content-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ContentID <span class="text-red-600">*</span></label>
+                                @if($role !== 1)   
+                                You cannot change this field!
+                                <input type="text" name="contentID" id="" class="{{Config::get('site.formInputClass')}}" placeholder=" " value="{{$content->contentID}}" disabled />
+                                @else
                                 <input type="text" name="contentID" id="" class="{{Config::get('site.formInputClass')}}" placeholder=" " value="{{$content->contentID}}" required />
+                                @endif
                             </div>
                             <div class="relative z-0 mb-5 group">
                                 <label for="content-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Value <span class="text-red-600">*</span></label>

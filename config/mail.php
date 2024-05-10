@@ -37,7 +37,7 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailersend.net'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
@@ -108,8 +108,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@tamasdogi.eu'),
-        'name' => env('MAIL_FROM_NAME', 'Message'),
+        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@pcms.eu'),
+        'name' => env('MAIL_FROM_NAME', 'Neue Nachricht'),
     ],
 
     /*

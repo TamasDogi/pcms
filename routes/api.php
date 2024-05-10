@@ -5,6 +5,9 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ContentController;
+use PharIo\Manifest\Email;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +29,14 @@ Route::get('/site/{id}', [SiteController::class, 'site']);
 Route::get('/pages', [PagesController::class, 'apiIndex']);
 Route::get('/pages/{id}', [PagesController::class, 'apiView']);
 
+Route::get('/content', [ContentController::class, 'apiIndex']);
+Route::get('/content/{id}', [ContentController::class, 'apiView']);
+
 Route::get('/contacts', [MessageController::class, 'index']);
 Route::post('/quote', [MessageController::class, 'sendMessage']);
 
+/*** Email backup **/
+Route::post('/send-message-mate', [EmailController::class, 'sendEmailMate']);
 Route::post('/message', [MessageController::class, 'message']);
 Route::get('/message/list', [MessageController::class, 'mlist']);
+Route::post('/sendemail', [EmailController::class, 'sendEmail']);

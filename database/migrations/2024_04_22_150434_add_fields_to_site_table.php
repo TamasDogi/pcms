@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
-            $table->id();
-            $table->integer('siteID');
-            $table->string('contentID');
-            $table->text('content_value');
-            $table->timestamps();
+        Schema::table('site', function (Blueprint $table) {
+           $table->string('domain')->nullable();
+           $table->string('domain')->nullable();
+           $table->integer('status')->default(0);
+           $table->integer('siteType')->default(0);
         });
     }
 
@@ -25,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::table('site', function (Blueprint $table) {
+            //
+        });
     }
 };
